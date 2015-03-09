@@ -35,4 +35,4 @@ gsettings set org.gnome.desktop.background picture-uri $picDir
 gsettings set org.gnome.desktop.background primary-color "#313435"
 # Add the eclipse application to the launcher as a favorite (pinned)
 sudo cp $scriptDir/eclipse.desktop /usr/share/applications
-gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'eclipse.desktop' *//g" | sed "s/'eclipse.desktop' *, */    /g" | sed -e "s/]$/, 'eclipse.desktop']/")"
+gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'application:\/\/eclipse.desktop' *//g" | sed "s/'application:\/\/eclipse.desktop' *, */    /g" | sed -e "s/]$/, 'application:\/\/eclipse.desktop']/")"
