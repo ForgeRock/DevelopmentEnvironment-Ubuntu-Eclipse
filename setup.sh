@@ -3,9 +3,9 @@ sudo -v
 scriptDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 echo "scriptDir is $scriptDir"
 envfile="forgerock_env.sh"
-sudo apt-get install vim
-sudo apt-get install maven
-sudo apt-get install openjdk-7-jdk
+sudo apt-get -y install vim
+sudo apt-get -y install maven
+sudo apt-get -y install openjdk-7-jdk
 
 
 mkdir -p $HOME/tmp/envfile

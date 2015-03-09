@@ -13,7 +13,7 @@ cat $tmpDir/sources1.list | sed '$a\deb http://de.archive.ubuntu.com/ubuntu/ sau
 sudo cp $tmpDir/sources2.list /etc/apt/sources.list
 sudo apt-get remove subversion libsvn1
 sudo apt-get update 
-sudo apt-get install subversion=1.7.9-1+nmu6ubuntu3 libsvn1=1.7.9-1+nmu6ubuntu3 libsvn-java=1.7.9-1+nmu6ubuntu3
+sudo apt-get install -y subversion=1.7.9-1+nmu6ubuntu3 libsvn1=1.7.9-1+nmu6ubuntu3 libsvn-java=1.7.9-1+nmu6ubuntu3
 
 echo subversion hold | sudo dpkg --set-selections
 echo libsvn1 hold | sudo dpkg --set-selections
