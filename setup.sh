@@ -10,7 +10,7 @@ sudo apt-get install openjdk-7-jdk
 
 mkdir -p $HOME/tmp/envfile
 
-cd $HOME/tmp/envfile
+pushd $HOME/tmp/envfile
 rm $envfile
 touch $envfile
 echo 'export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/' >> $envfile
@@ -19,6 +19,8 @@ echo 'export M2=/usr/share/maven/bin' >> $envfile
 echo "export MAVEN_OPTS='-Xmx2g -Xms2g -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m'" >> $envfile
 sudo cp $envfile /etc/profile.d
 
+cd $scriptDir
+rm -rf $HOME/tmp
 
 source installSVN1.7onUbuntu14-04.sh 
 source installEclipseJunoOnUbuntu.sh
