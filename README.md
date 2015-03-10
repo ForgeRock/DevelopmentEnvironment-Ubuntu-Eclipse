@@ -60,11 +60,96 @@ Install the VirtualBox Guest Additions (helps you
 resize ubuntu, go fullscreen etc)
 
 ###On Your Guest Ubuntu VM
-Install Git from the command line `sudo apt-get install git`
 
-Clone this repository to a temporary location.
+
+####Get the configuration files from GitHub
+
+On your Ubuntu VM, install Git from the command line `sudo apt-get install git`
+
+Clone this repository to ~/Documents;
+
+```
+cd ~/Documents
+git clone https://github.com/ForgeRock/DevelopmentEnvironment-Ubuntu-Eclipse.git
+```
 
 From the terminal CD into this repository location and run `./setup.sh`
+
+```bash
+cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
+./setup.sh
+```
+
+This will take a while to run, and you will need to provide your password to sudo at some point. When it's all done you will have maven, subversion and eclipse all installed, and your enviroment configured. 
+
+There are still a couple of steps required to configure eclipse, and as yet I have not found a suitable way of automating these steps. 
+
+First off, eclipse uses a 'LifeCycle Mapping' paradigm to handle m2eclipse plugins. You can read about that here; <https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html>. To stop our eclipse workspace being full of `Plugin execution not covered by lifecycle configuration` errors then we need to configure our Open Identity Platform workspaces to use a lifecycle-mapping-metadata.xml file that defines mappings for the maven plugins used by the projects.
+
+This is best explained by demonstration, so hold tight, here we go;
+
+####Configuring Eclipse to work with OpenAM
+
+Open eclipse by clicking on the eclipse icon in the ubuntu launcher.
+Create a new workspace in `~/Documents/openam` 
+When eclipse has loaded you can configure the workspace to use the lifecycle mapping file;
+
+1. Open the preferences dialog (from the windows menu)
+![Imgur](http://i.imgur.com/0g9949x.png)
+2. Navigate to the Maven->Lifecycle Mapping preferences;
+![Imgur](http://i.imgur.com/gPN5X3x.png)
+3. Change the lifecycle mapping file location. Browse to the provided mapping file in the git repository you cloned earlier at `~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse/lifecycle-mapping-metadata.xml` then click Apply and then OK;
+![Imgur](http://i.imgur.com/jfwAdh6.png)
+
+With eclipse now ready, lets get hold of our OpenAM code.
+
+From the command line change directory to your local copy of this repository where there is a script get the openam code. It will do an svn checkout of open am to `~/code/fr/openam`;
+
+The first time you build the OpenAM project, maven will need to download many dependencies and plugins. Personally I prefer to my first build on the command line rather than in eclipse as the visibility of what is happening is enhanced. To do this;
+
+```
+cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
+./get_openam_code.sh
+cd ~/code/fr/openam
+mvn clean install
+```
+
+You now have time to get a cuppa, glass of someting etc.. 
+
+####Import OpenAM into Eclipse
+
+1. Right click in the 'Package Explorer' area of the workspace and choose Import;
+![Imgur](http://i.imgur.com/TH7662S.png)
+2. Choose to Import Existing Maven Projects;
+![Imgur](http://i.imgur.com/jJSjNKL.png)
+3. Select the root folder of your openam project, which is at `~/code/fr/openam`
+4. Click OK and import the project!
+
+There's one more thing to set up. You will notice that there are hundreds of errors on the openam-core project. This is because that project is dependent on generated classes that live in the openam-idsvc-schema and openam-mib-schema projects. Let's tell eclipse about that dependency now;
+
+1. If you didn't build OpenAM from the command line earlier (I admire your rebelious spirit, but you didn't really think you'd get away with it did you?) then do it now. Close eclipse, do the build then re-open your Eclipse workspace and wait for the workspace to finish building. 
+2. Open the project properties for the openam-core project.
+![Imagur](http://i.imgur.com/KyGE2YQ.png)
+3. Add openam-idsvcs-schema and openam-mib-schema projects as Project References.
+![Imgur](http://i.imgur.com/yTn9wRE.png)
+4. On the project's Java Build Path select the libraries tab and choose Add JARs... Navigate to the openam-idsvcs-schema project's target jar and click OK.
+![Imgur](http://i.imgur.com/hxgAwHl.png)
+5. Do the same for the openam-mib-schema project's target jar. Then click OK. The project workspace will build and **Hey Presto** you have a working environment! 
+![Imgur](http://i.imgur.com/t6qFI7A.png)
+
+##Development
+
+If you'd like to contribute to this project please feel free to fork it, improve it an submit a pull request. 
+
+###Some further development suggestions
+It would be great to create a fork that configured the environment to use the community version of intelliJ Idea.
+
+Some scripts and instructions for getting started with OpenIDM, OpenDJ and OpenIG would be great.
+
+
+
+
+
 
 
 
