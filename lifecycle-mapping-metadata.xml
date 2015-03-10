@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+        <artifactId>svn-revision-number-maven-plugin</artifactId>
+        <versionRange>1.13</versionRange>
+        <goals>
+          <goal>revision</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <versionRange>3.3</versionRange>
+        <goals>
+          <goal>helpmojo</goal>
+          <goal>descriptor</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <versionRange>1.7</versionRange>
+        <goals>
+          <goal>run</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.forgerock.maven.plugins</groupId>
+        <artifactId>build-helper-plugin</artifactId>
+        <versionRange>13.0.0-SNAPSHOT</versionRange>
+        <goals>
+          <goal>generate-cli</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>com.github.mcheely</groupId>
+        <artifactId>requirejs-maven-plugin</artifactId>
+        <versionRange>2.0.0</versionRange>
+        <goals>
+          <goal>optimize</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute />
+      </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
