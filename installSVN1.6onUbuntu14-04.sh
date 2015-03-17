@@ -11,7 +11,7 @@ cat $tmpDir/sources.list | sed '$a\deb http://extras.ubuntu.com/ubuntu precise m
 cat $tmpDir/sources1.list | sed '$a\deb http://de.archive.ubuntu.com/ubuntu/ precise main universe restricted multiverse' > $tmpDir/sources2.list
 
 sudo cp $tmpDir/sources2.list /etc/apt/sources.list
-sudo apt-get remove subversion libsvn1
+sudo apt-get remove subversion libsvn1 libsvn-java
 sudo apt-get update 
 sudo apt-get install -y subversion libsvn1 libsvn-java
 
