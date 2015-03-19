@@ -22,7 +22,7 @@ sudo cp $envfile /etc/profile.d
 cd $scriptDir
 rm -rf $HOME/tmp
 
-source installSVN1.7onUbuntu14-04.sh 
+source installSVN1.6onUbuntu14-04.sh 
 source installEclipseJunoOnUbuntu.sh
 
 cd $scriptDir
