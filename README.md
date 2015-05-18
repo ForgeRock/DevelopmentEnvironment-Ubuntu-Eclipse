@@ -8,7 +8,7 @@ This has been tested on a virtual machine running in VirtualBox on OS X on mac.
 
 The scripts will install the following on your ubuntu image;
 
-* Subversion v1.7.9
+* Subversion v1.6.17
 * maven v3.0.5
 * vim 7.4
 * openjdk-7-jdk 
