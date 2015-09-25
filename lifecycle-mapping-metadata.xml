@@ -11,7 +11,7 @@
         </goals>
       </pluginExecutionFilter>
       <action>
-        <execute />
+        <ignore />
       </action>
     </pluginExecution>
     <pluginExecution>
@@ -65,6 +65,32 @@
       </pluginExecutionFilter>
       <action>
         <execute />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <versionRange>1.8</versionRange>
+        <goals>
+          <goal>add-source</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <ignore />
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <versionRange>2.2.4</versionRange>
+        <goals>
+          <goal>process</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <ignore />
       </action>
     </pluginExecution>
   </pluginExecutions>
