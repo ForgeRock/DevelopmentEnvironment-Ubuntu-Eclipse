@@ -1,12 +1,40 @@
 ##DevelopmentEnvironment-Ubuntu-Eclipse
 
-This project contains scripts that will configure a fresh instance of Ubuntu 14.04 LTS (Trusty Tahr) Desktop to be a development environment for the ForgeRock Open Identity Platform.
+This project contains scripts that will configure a fresh instance of Ubuntu Desktop to be a development environment for the ForgeRock Open Identity Platform.
 
-This has been tested on a virtual machine running in VirtualBox on OS X on mac.
+There are a number of configurations supported;
+* setup2016.sh is best run on a Ubuntu 15.10 image.
+* setup2015.sh is best run on a 14.04 LTS (Trusty Tahr) image and works with OpenAM 12.
+* setup2014.sh is best run on a 14.04 LTS (Trusty Tahr) image and works with OpenAM 11.
+
+This has been tested using Ubuntu images running in VirtualBox on OS X on mac.
 
 ###Environment
 
 The scripts will install the following on your ubuntu image;
+## setup2016.sh
+Use this script to work with the latest git repositories hosted on ForgeRock's Stash server (e.g. OpenAM 13). This script installs the following on your Ubuntu image;
+
+* No Subversion! Yay! 
+* Git v2.5.0
+* Maven 3.3.3
+* openjdk-8-jdk
+* vim  7.4
+* Eclipse (Mars.1 release (4.5.1), Java EE edition), with the following plugins;
+	* m2e connector for buid-helper-maven-plugin 
+	* m2e connector for the Maven Dependency Plugin 
+	* 
+The following enviroment variables will be set (in /etc/profile.d/forgerock_env.sh);
+
+``` bash
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+M2_HOME=/usr/share/maven
+M2=/usr/share/maven/bin
+MAVEN_OPTS='-Xmx2g -Xms2g -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m'"
+```
+
+## setup2014-15.sh
+Use this script to work with older SVN based releases such as OpenAM 11.0.0 and OpenAM 12.0.0. This script installs the following on your Ubuntu image;
 
 * Subversion v1.6.17
 * maven v3.0.5
@@ -40,7 +68,7 @@ The eclipse application will be added to the launcher favorites for easy launchi
 
 ## Usage
 
-Download the latest Ubuntu 14.04 release (SR2 at the time of writing) from here; <http://www.ubuntu.com/download/desktop>
+Download the required ubuntu image from here; <http://www.ubuntu.com/download/desktop>
 
 Download and install VirtualBox from here <https://www.virtualbox.org/wiki/Downloads>
 
@@ -61,7 +89,6 @@ resize ubuntu, go fullscreen etc)
 
 ###On Your Guest Ubuntu VM
 
-
 ####Get the configuration files from GitHub
 
 On your Ubuntu VM, install Git from the command line `sudo apt-get install git`
@@ -73,11 +100,18 @@ cd ~/Documents
 git clone https://github.com/ForgeRock/DevelopmentEnvironment-Ubuntu-Eclipse.git
 ```
 
-From the terminal CD into this repository location and run `./setup.sh`
+From the terminal CD into this repository location and run either `./setup.sh` or `./setup2016.sh` depending on the codebase you wish to work with.
 
 ```bash
 cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
 ./setup.sh
+```
+
+or
+
+```bash
+cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
+./setup2016.sh.sh
 ```
 
 This will take a while to run, and you will need to provide your password to sudo at some point. When it's all done you will have maven, subversion and eclipse all installed, and your enviroment configured. 
@@ -98,21 +132,34 @@ When eclipse has loaded you can configure the workspace to use the lifecycle map
 ![Imgur](http://i.imgur.com/0g9949x.png)
 2. Navigate to the Maven->Lifecycle Mapping preferences;
 ![Imgur](http://i.imgur.com/gPN5X3x.png)
-3. Change the lifecycle mapping file location. Browse to the provided mapping file in the git repository you cloned earlier at `~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse/lifecycle-mapping-metadata.xml` then click Apply and then OK;
+3. Change the lifecycle mapping file location. Browse to appropriate mapping file for your setup in the git repository you cloned earlier. Either `~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse/lifecycle-mapping-metadata.xml` or `~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse/lifecycle-mapping-metadata-2016.xml` then click Apply and then OK;
 ![Imgur](http://i.imgur.com/jfwAdh6.png)
 
 With eclipse now ready, lets get hold of our OpenAM code.
 
-From the command line change directory to your local copy of this repository where there is a script get the openam code. It will do an svn checkout of open am to `~/code/fr/openam`;
+## OpenAM 11 & 12 
 
-The first time you build the OpenAM project, maven will need to download many dependencies and plugins. Personally I prefer to my first build on the command line rather than in eclipse as the visibility of what is happening is enhanced. To do this;
+From the command line change directory to your local copy of this repository where there are scripts get the openam code. The scripts will do a svn checkout of OpenAM to `~/code/fr/openam`;
+
+The first time you build the OpenAM project, maven will need to download many dependencies and plugins. Personally I prefer to my first build on the command line rather than in eclipse as the visibility of what is happening is enhanced. To do this run the following depending on which release of OpenAM you wish to work with;
+
+**OpenAM 11.0.0**
 
 ```
 cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
-./get_openam_code.sh
+./get_openam_code_11.0.0.sh
 cd ~/code/fr/openam
 mvn clean install
 ```
+**OpenAM 12.0.0**
+
+```
+cd ~/Documents/DevelopmentEnvironment-Ubuntu-Eclipse
+./get_openam_code_12.0.0.sh
+cd ~/code/fr/openam
+mvn clean install
+```
+
 
 You now have time to get a cuppa, glass of someting etc.. 
 
