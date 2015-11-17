@@ -13,7 +13,8 @@ fi
 origDir=`pwd`
 cd $HOME/Downloads
 if [ ! -f $HOME/Downloads/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz ];then
-    wget 'http://sourceforge.net/projects/eclipse.mirror/files/Eclipse%204.4.2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz'
+    #wget 'http://sourceforge.net/projects/eclipse.mirror/files/Eclipse%204.4.2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz'
+    wget 'http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz'
 fi
 
 cd /opt
