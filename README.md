@@ -1,5 +1,10 @@
 ##DevelopmentEnvironment-Ubuntu-Eclipse
 
+## Warning
+**This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.**
+
+## About
+
 This project contains scripts that will configure a fresh instance of Ubuntu Desktop to be a development environment for the ForgeRock Open Identity Platform.
 
 There are a number of configurations supported;
